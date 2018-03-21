@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BKKK</string>
+    <string name="email">Email</string>
+    <string name="password">Hasło</string>
+    <string name="todo">TODO</string>
+    <color name="orange">#fcab5a</color>
+    <color name="blue">#2E83CD</color>
+</resources>
