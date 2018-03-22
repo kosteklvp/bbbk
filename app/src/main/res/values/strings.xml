@@ -3,6 +3,14 @@
     <string name="email">Email</string>
     <string name="password">Hasło</string>
     <string name="todo">TODO</string>
-    <color name="orange">#fcab5a</color>
-    <color name="blue">#2E83CD</color>
+    <string name="odzyskiwanie_hasla">Odzyskiwanie hasła</string>
+    <string name="rejestracja">Rejestracja</string>
+    <string name="zaloguj">Zaloguj</string>
+    <string name="zarejestruj">Dalej</string>
+    <string name="nazwisko">Nazwisko</string>
+    <string name="imie">Imię</string>
+    <string name="haslo">Hasło</string>
+    <string name="haslo2">Potwierdź hasło</string>
+    <color name="primary_color">#fcab5a</color>
+    <color name="secondary_color">#2E83CD</color>
 </resources>

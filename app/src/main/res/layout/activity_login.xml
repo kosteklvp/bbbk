@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
+    android:background="@color/primary_color"
     tools:context="pl.kosteklvp.bbbk_v2.LoginActivity">
 
     <ImageView
@@ -56,8 +56,8 @@
         android:layout_below="@+id/passwordField"
         android:layout_marginTop="24dp"
         app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="@color/blue"
-        android:id="@+id/cardView">
+        app:cardBackgroundColor="@color/secondary_color"
+        android:id="@+id/cardViewLogin">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -69,8 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="Zaloguj"
-                android:textColor="@color/orange"
+                android:text="@string/zaloguj"
+                android:textColor="@color/primary_color"
                 android:textSize="22sp"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -80,12 +80,12 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cardView"
+        android:layout_below="@+id/cardViewLogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:text="Rejestracja"
-        android:textColor="@color/blue"
-        android:textSize="16dp" />
+        android:layout_marginTop="26dp"
+        android:text="@string/rejestracja"
+        android:textColor="@color/secondary_color"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/lost_password"
@@ -93,8 +93,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/register"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:text="Odzyskiwanie hasła"
-        android:textColor="@color/blue"
-        android:textSize="16dp" />
+        android:layout_marginTop="20dp"
+        android:text="@string/odzyskiwanie_hasla"
+        android:textColor="@color/secondary_color"
+        android:textSize="16sp" />
 </RelativeLayout>
