@@ -1,8 +1,12 @@
 package pl.kosteklvp.bbbk_v2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -14,7 +18,13 @@ public class SplashActivity extends AppCompatActivity {
         Thread splash = new Thread() {
           public void run() {
               try {
-                  sleep(3600);
+                  sleep(2000);
+
+                  if(isNetworkAvailable()) {
+                      Toast.makeText(getApplicationContext(), "Brak połączenia z internetem. Włącz internet i spróbuj ponownie", Toast.LENGTH_LONG).show();
+                  }
+
+                  sleep(1500);
               }
               catch (Exception e) {
                   e.printStackTrace();
@@ -26,12 +36,20 @@ public class SplashActivity extends AppCompatActivity {
           }
         };
 
-        splash.start();
+           splash.start();
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         finish();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

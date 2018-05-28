@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="bottom"
     android:background="@color/primary_color"
     tools:context="pl.kosteklvp.bbbk_v2.LoginActivity">
 
@@ -57,7 +58,7 @@
         android:layout_marginTop="24dp"
         app:cardCornerRadius="16dp"
         app:cardBackgroundColor="@color/secondary_color"
-        android:id="@+id/cardViewLogin">
+        android:id="@+id/cardViewBack">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -80,21 +81,11 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cardViewLogin"
+        android:layout_below="@+id/cardViewBack"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
         android:text="@string/rejestracja"
         android:textColor="@color/secondary_color"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/lost_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/register"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/odzyskiwanie_hasla"
-        android:textColor="@color/secondary_color"
-        android:textSize="16sp" />
 </RelativeLayout>

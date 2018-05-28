@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_color"
+    tools:context="pl.kosteklvp.bbbk_v2.LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="180dp"
+        android:layout_height="44dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="22dp"
+        android:contentDescription="@string/todo"
+        app:srcCompat="@drawable/logo" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardViewBack"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:animateLayoutChanges="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:cardBackgroundColor="@color/secondary_color"
+        app:cardCornerRadius="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Powrót"
+                android:textColor="@color/primary_color"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvBoard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cardViewBack"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignRight="@+id/cardViewBack"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="14dp"
+        android:paddingBottom="10dp"
+        android:text="Board"
+        android:gravity="center"
+        android:textColor="@color/secondary_color"
+        android:textSize="18sp" />
+
+    <!--android:animateLayoutChanges="true"-->
+
+    <ExpandableListView
+        android:id="@+id/exListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvBoard"
+        android:paddingLeft="20dp"
+        android:groupIndicator="@drawable/custom_expandable"
+        android:paddingRight="20dp" />
+
+</RelativeLayout>
