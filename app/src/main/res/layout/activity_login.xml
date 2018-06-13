@@ -58,7 +58,7 @@
         android:layout_marginTop="24dp"
         app:cardCornerRadius="16dp"
         app:cardBackgroundColor="@color/secondary_color"
-        android:id="@+id/cardViewBack">
+        android:id="@+id/cardViewCreate">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -81,7 +81,7 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cardViewBack"
+        android:layout_below="@+id/cardViewCreate"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
         android:text="@string/rejestracja"

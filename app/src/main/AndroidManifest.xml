@@ -29,8 +29,10 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".BoardActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".BoardActivity" />
+        <activity android:name=".CreateBoardActivity" />
+        <activity android:name=".CreateListActivity"></activity>
     </application>
 
 </manifest>

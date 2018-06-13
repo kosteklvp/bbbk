@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        buttonLogin = findViewById(R.id.cardViewBack);
+        buttonLogin = findViewById(R.id.cardViewCreate);
         buttonRegister = findViewById(R.id.register);
         etPassword = findViewById(R.id.passwordField);
         etUsername = findViewById(R.id.loginField);

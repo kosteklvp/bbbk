@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.emailField);
         etPassword1 = findViewById(R.id.passwordField);
         etPassword2 = findViewById(R.id.passwordField2);
-        buttonRegister = findViewById(R.id.cardViewBack);
+        buttonRegister = findViewById(R.id.cardViewCreate);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override

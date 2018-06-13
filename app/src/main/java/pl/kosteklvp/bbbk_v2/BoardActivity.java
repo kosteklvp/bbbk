@@ -1,14 +1,24 @@
 package pl.kosteklvp.bbbk_v2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,20 +47,72 @@ public class BoardActivity extends AppCompatActivity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     List<String> listOfListasId;
+    ImageView buttonAdd;
 
     List<Lista> listOfListas;
     List<String> listOfListasNames;
 
+    int onPressedItemId;
+    int onNewTaskTableID;
+
+    static boolean shouldRefresh = false;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(shouldRefresh) {
+            listOfListasNames = new ArrayList<String>();
+            listOfListasId = new ArrayList<String>();
+            listOfListas = new ArrayList<Lista>();
+
+
+
+
+            Networking n = new Networking();
+            try {
+                Object obj = n.execute().get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            NetworkingForTasks n2 = new NetworkingForTasks();
+            try {
+                Object obj = n2.execute().get();
+                _("executed");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            if(listOfListas.size()>0) {
+
+                prepareListData();
+
+                listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+                expListView.setAdapter(listAdapter);
+
+
+            }
+
+        }
+
+        shouldRefresh = false;
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
-        buttonBack = findViewById(R.id.cardViewBack);
+        buttonBack = findViewById(R.id.cardViewCreate);
         tvBoard = findViewById(R.id.tvBoard);
         expListView = findViewById(R.id.exListView);
-
+        buttonAdd = findViewById(R.id.buttonAddList);
 
 
         Intent intent = getIntent();
@@ -84,6 +146,18 @@ public class BoardActivity extends AppCompatActivity {
             }
         });
 
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent conn_Board_CreateList = new Intent(BoardActivity.this, CreateListActivity.class);
+                conn_Board_CreateList.putExtra("user_id", user_id);
+                conn_Board_CreateList.putExtra("board_id", boardId);
+
+                startActivity(conn_Board_CreateList);
+
+            }
+        });
+
         tvBoard.setText(boardTitle);
 
         NetworkingForTasks n2 = new NetworkingForTasks();
@@ -96,18 +170,30 @@ public class BoardActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-    if(listOfListas.size()>0) {
+        if(listOfListas.size()>0) {
 
-        prepareListData();
+            prepareListData();
 
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-        expListView.setAdapter(listAdapter);
-
-    } else {
+            listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+            expListView.setAdapter(listAdapter);
 
 
+        }
 
-    }
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+
+
+                if(listOfListas.get(i).listOfTasksTitles.get(i1).equals("Dodaj nowe zadanie")) {
+                    _(listOfListas.get(i).getId() + "");
+
+                }
+
+                return false;
+            }
+        });
+
 
     }
 
@@ -135,6 +221,7 @@ public class BoardActivity extends AppCompatActivity {
         try {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
             int responseCode = con.getResponseCode();
 
             _("Sending to url " + url);
@@ -149,9 +236,8 @@ public class BoardActivity extends AppCompatActivity {
             }
             in.close();
 
-            //print in String
             _(response.toString());
-            _("3");
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -181,8 +267,6 @@ public class BoardActivity extends AppCompatActivity {
 
                 listOfListas.add(lista);
                 listOfListasNames.add(jsonObject.getString("title"));
-                _("dodano do listy " + lista.getTitle());
-
             }
 
 
@@ -196,7 +280,6 @@ public class BoardActivity extends AppCompatActivity {
     private void prepareListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
-        _("AAAAAAAAA" + listOfListas.size());
 
         for(int i=0; i<listOfListas.size(); i++) {
             listDataHeader.add(listOfListas.get(i).getTitle());
@@ -209,6 +292,7 @@ public class BoardActivity extends AppCompatActivity {
                 listDataChild.put(listDataHeader.get(i), listOfListas.get(i).listOfTasksTitles);
 
             }
+
         }
 
     }
@@ -271,7 +355,6 @@ public class BoardActivity extends AppCompatActivity {
             listOfListas.get(id).listOfTasks = new ArrayList<Task>();
             listOfListas.get(id).listOfTasksTitles = new ArrayList<String>();
 
-            _("_________________ " + jsonArr.length());
             for(int j=0; j<jsonArr.length(); j++) {
                 JSONObject jsonObject = jsonArr.getJSONObject(j);
                 Task task = new Task();
@@ -287,24 +370,17 @@ public class BoardActivity extends AppCompatActivity {
                 listOfListas.get(id).listOfTasks.add(task);
                 listOfListas.get(id).listOfTasksTitles.add(jsonObject.getString("title"));
 
-                _("||||||||||DODANO DO LISTY TASKÓW " + listOfListas.get(id).getTitle() + " |||| TASK " + jsonObject.getString("title"));
-                _("LICZBA TASKOW W LISCIE #" + listOfListas.get(id).getId() + " = " + listOfListas.get(id).listOfTasks.size());
-
             }
-
-
-
-
-
-
-
-
+            listOfListas.get(id).listOfTasksTitles.add("Dodaj nowe zadanie");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
+
+
+
 }
 
 

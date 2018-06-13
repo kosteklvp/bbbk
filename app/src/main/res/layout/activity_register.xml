@@ -96,7 +96,7 @@
         android:inputType="textPassword" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardViewBack"
+        android:id="@+id/cardViewCreate"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_alignLeft="@+id/passwordField2"
